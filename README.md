@@ -137,6 +137,8 @@ python -m pytest           # 9 tests
 - Unit tests (`tests/test_models.py`): price parsing, missing-item split, totals checks, input validation.
 - Live tests (`tests/test_e2e.py`): full run for `standard_user` and `performance_glitch_user`, `locked_out_user` failing clearly, all items missing, and a broken input file.
 
+CI (GitHub Actions) runs the unit tests and, in a second job, the live end-to-end tests on every push.
+
 ## Project layout
 
 ```
