@@ -29,9 +29,15 @@ if (-not (Test-Path ".venv\Scripts\python.exe")) {
 
 $venvPython = Join-Path $repo ".venv\Scripts\python.exe"
 
+Write-Host "Updating pip ..."
+& $venvPython -m pip install --upgrade pip
+if ($LASTEXITCODE -ne 0) { Fail "Could not update pip." }
+
+# --only-binary: use prebuilt wheels only, so nothing is ever compiled and no
+# C++ Build Tools are needed. If a wheel is missing, pip stops with a clear message.
 Write-Host "Installing dependencies ..."
-& $venvPython -m pip install --disable-pip-version-check -r requirements.txt
-if ($LASTEXITCODE -ne 0) { Fail "pip install failed." }
+& $venvPython -m pip install --only-binary=:all: -r requirements.txt
+if ($LASTEXITCODE -ne 0) { Fail "pip install failed (see the message above)." }
 
 Write-Host "Installing Chromium for Playwright (about 150 MB, first time only) ..."
 & $venvPython -m playwright install chromium
