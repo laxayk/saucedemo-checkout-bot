@@ -16,6 +16,17 @@ export SAUCE_PASSWORD=secret_sauce  # public demo password shown on the site's h
 python -m saucebot                  # reads input.json, writes outputs/
 ```
 
+On Windows (PowerShell 5.1+) use the `.ps1` equivalents:
+
+```powershell
+.\scripts\setup.ps1                              # venv, dependencies, Chromium
+.\scripts\run.ps1                                # standard_user, writes outputs\
+.\scripts\run.ps1 performance_glitch_user --headed
+.\scripts\test.ps1                               # all tests (-UnitOnly for the fast ones)
+```
+
+If PowerShell blocks scripts, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` first.
+
 Other ways to run:
 
 | Command | What it does |
